@@ -2,9 +2,10 @@ package atlas
 
 import (
 	"errors"
-	"github.com/gonutz/binpacker"
 	"image"
 	"image/draw"
+
+	"github.com/gonutz/binpacker"
 )
 
 // Atlas is itself a draw.Image and contains a number of sub-images.
@@ -60,7 +61,7 @@ func (a *Atlas) Add(id string, img image.Image) (SubImage, error) {
 	// determine the position of the new image
 	rect, err := a.packer.Insert(img.Bounds().Dx(), img.Bounds().Dy())
 	if err != nil {
-		return SubImage{}, errors.New("unable to add image to atlas: " + err.Error())
+		return SubImage{}, errors.New("unable to add image '" + id + "' to atlas: " + err.Error())
 	}
 	var bounds image.Rectangle
 	bounds.Min = a.Image.Bounds().Min.Add(image.Pt(rect.X, rect.Y))
